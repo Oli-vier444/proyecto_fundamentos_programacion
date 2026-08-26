@@ -1,6 +1,6 @@
 calificacion1 = 80
 calificación2 = 30
-calificación3 = 95.5
+calificación3 = 95
 
 promedio = (calificacion1 + calificación2 + calificación3) / 3
 
