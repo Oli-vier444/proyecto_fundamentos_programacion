@@ -33,9 +33,9 @@ Algoritmo “Organización y automatización de correos electrónicos”
 9.	SINO
     a.	PREGUNTAR si desea salir
     b.	GUARDAR en desea_salir
-c.	SI desea_salir == 'si'
-    i.	FIN
-d.	SINO
-    i.	REGRESAR a paso 4
+	c.	SI desea_salir == 'si'
+    	i.	FINSI
+	d.	SINO
+    	i.	REGRESAR a paso 4
 10.	FIN
 """
