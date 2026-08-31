@@ -42,7 +42,7 @@ Algoritmo “Organización y automatización de correos electrónicos”
     a.	PREGUNTAR si desea salir
     b.	GUARDAR en desea_salir
 	c.	SI desea_salir == 'si'
-    	i.	FIN
+    	i.	FINSI
 	d.	SINO
     	i.	REGRESAR a paso 4
 10.	FIN
