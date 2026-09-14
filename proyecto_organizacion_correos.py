@@ -1,21 +1,25 @@
-"""
-Algoritmo “Organización y automatización de correos electrónicos”
 
-1.	INICIO
-2.	INGRESAR a correo electrónico del usuario
-3.	DEFINIR opciones = “ 1. Buscar
-		                 2. Escribir correo
-		                 3. Salir “
-4.	IMRPIMIR opciones
-5.	PEDIR al usuario que ingrese un número
-6.	GUARDAR en opcion_elegida
-"""
-opciones = "1. Buscar \n2. Escribir correo \n3. Salir"
-print(opciones)
+#Algoritmo “Organización y automatización de correos electrónicos”
+
+def ingresar_a_correo():
+    input("USUARIO: ")
+    input("CONTRASEÑA: ")
+
+def mostrar_menu():
+    opciones = "1. Buscar \n2. Escribir correo \n3. Salir"
+    print(opciones)
+
+def escribir_correo():
+    input("Destinatario: ")
+    input("Asunto: ")
+    input("Mensaje: ")
+
+ingresar_a_correo()
+mostrar_menu()
+
 opcion_elegida = input("Ingrese un número: ")
+
 """""
-
-
 7.	SI opcion_elegida == '1'
     a.	PEDIR al usuario palabras clave 
     b.	GUARDAR en palabras_clave
@@ -39,6 +43,9 @@ antiguedad = fecha_entrada - fecha_actual
     a.	PEDIR el destinatario
     b.	PEDIR el asunto
     c.	PEDIR el mensaje
+"""
+escribir_correo()
+"""
     d.	PREGUNTAR si el usuario lo desea enviar
     e.	GUARDAR en desea_enviar
     f.	SI desea enviar == 'si'
@@ -51,6 +58,7 @@ antiguedad = fecha_entrada - fecha_actual
 c.	SI desea_salir == 'si'
     i.	FIN
 d.	SINO
-    i.	REGRESAR a paso 4
+    i.	REGRESAR a paso 4 -- mostrar_menu()6
+    
 10.	FIN
 """
