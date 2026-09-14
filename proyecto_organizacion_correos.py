@@ -58,7 +58,7 @@ escribir_correo()
 c.	SI desea_salir == 'si'
     i.	FIN
 d.	SINO
-    i.	REGRESAR a paso 4 -- mostrar_menu()6
+    i.	REGRESAR a paso 4 -- mostrar_menu()
     
 10.	FIN
 """
