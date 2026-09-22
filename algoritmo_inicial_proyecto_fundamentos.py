@@ -1,41 +1,57 @@
 """
-Algoritmo “Organización y automatización de correos electrónicos”
 
-1.	INICIO
-2.	INGRESAR a correo electrónico del usuario
-3.	DEFINIR opciones = “ 1. Buscar
+Algoritmo “Organización y automatización de correos electrónicos”
+Entradas
+- correo electrónico (string)
+- contraseña (string)
+
+
+1.INICIO
+2.INGRESAR a correo electrónico del usuario
+3.DEFINIR opciones = “ 1. Buscar
 		                 2. Escribir correo
 		                 3. Salir “
-4.	IMRPIMIR opciones
-5.	PEDIR al usuario que ingrese un número
-6.	GUARDAR en opcion_elegida
-7.	SI opcion_elegida == '1'
-    a.	PEDIR al usuario palabras clave 
-    b.	GUARDAR en palabras_clave
-    c.	DEFINIR total_palabras_clave = 0
-    d.	LEER bandeja de entrada
-    e.	SI correo electrónico contiene cualquier palabra de palabras_clave
-        i.	SUMAR total_palabras_clave += 1
-        ii.	IMPRIMIR correo electrónico
-    g.	SINO
-        i.	IMPRIMIR “No se encontraron las palabras ingresadas”
-    h.  IMPRIMIR total_palabras_clave
-8.	SI opción elegida == '2'
-    a.	PEDIR el destinatario
-    b.	PEDIR el asunto
-    c.	PEDIR el mensaje
-    d.	PREGUNTAR si el usuario lo desea enviar
-    e.	GUARDAR en desea_enviar
-    f.	SI desea enviar == 'si'
-        i.	ENVIAR correo
-    g.	SINO
-        i.	GUARDAR correo
-9.	SINO
-    a.	PREGUNTAR si desea salir
-    b.	GUARDAR en desea_salir
-	c.	SI desea_salir == 'si'
-    	i.	FINSI
-	d.	SINO
-    	i.	REGRESAR a paso 4
-10.	FIN
+4.IMRPIMIR opciones
+5.PEDIR al usuario que ingrese un número
+6.GUARDAR en opcion_elegida
+7.LEER bandeja de entrada
+8.SI opcion_elegida == '1'
+    8.1.PEDIR al usuario palabras clave 
+    8.2.GUARDAR en palabras_clave
+    8.3.DEFINIR total_palabras_clave = 0
+    8.4.SI correo electrónico contiene cualquier palabra de palabras_clave
+        8.5.1	SUMAR total_palabras_clave += 1
+        8.5.2	IMPRIMIR correo electrónico
+    8.5.SINO
+        8.5.1	IMPRIMIR “No se encontraron las palabras ingresadas”
+    8.6. IMPRIMIR total_palabras_clave
+9.SI opción elegida == '2'
+    9.1.PEDIR el destinatario
+    9.2.PEDIR el asunto
+    9.3.PEDIR el mensaje
+    9.4.PREGUNTAR si el usuario lo desea enviar
+    9.5.GUARDAR en desea_enviar
+    9.6.SI desea enviar == 'si'
+        9.6.1.	ENVIAR correo
+		9.6.2.	PREGUNTAR si desea enviarlo periódicamente
+		9.6.3.	GUARDAR en envio_periodico
+		9.6.4.	SI envio_periodico == ´si´
+			9.6.4.1. PREGUNTAR frecuencia en días
+			9.6.4.2. GUARDAR en frecuencia
+			9.6.4.2. ENVIAR correo cada frecuencia días
+    9.7.SINO
+        9.7.1.	GUARDAR correo
+10.SINO
+    10.1.PREGUNTAR si desea salir
+    10.2.GUARDAR en desea_salir
+    10.3.SI desea_salir == 'si'
+    	10.3.1	FINSI
+    10.4.	SINO
+    	10.4.1REGRESAR a paso 4
+11.FIN
+
+Salidas
+-total_palabras_clave (entero)
+-
+
 """
