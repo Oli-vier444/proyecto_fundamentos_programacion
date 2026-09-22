@@ -13,35 +13,41 @@ Entradas
 4.IMRPIMIR opciones
 5.PEDIR al usuario que ingrese un número
 6.GUARDAR en opcion_elegida
-7.SI opcion_elegida == '1'
-    7.1.PEDIR al usuario palabras clave 
-    7.2.GUARDAR en palabras_clave
-    7.3.DEFINIR total_palabras_clave = 0
-    7.4.LEER bandeja de entrada
-    7.5.SI correo electrónico contiene cualquier palabra de palabras_clave
-        7.5.1	SUMAR total_palabras_clave += 1
-        7.5.2	IMPRIMIR correo electrónico
-    7.6.SINO
-        7.6.1	IMPRIMIR “No se encontraron las palabras ingresadas”
-    7.7. IMPRIMIR total_palabras_clave
-8.SI opción elegida == '2'
-    8.1.PEDIR el destinatario
-    8.2.PEDIR el asunto
-    8.3.PEDIR el mensaje
-    8.4.PREGUNTAR si el usuario lo desea enviar
-    8.5.GUARDAR en desea_enviar
-    8.6.SI desea enviar == 'si'
-        8.6.1	ENVIAR correo
-    8.7.SINO
-        8.7.1.	GUARDAR correo
-9.SINO
-    9.1.PREGUNTAR si desea salir
-    9.2.GUARDAR en desea_salir
-    9.3.SI desea_salir == 'si'
-    	9.3.1	FINSI
-    9.4.	SINO
-    	9.4.1REGRESAR a paso 4
-10.FIN
+7.LEER bandeja de entrada
+8.SI opcion_elegida == '1'
+    8.1.PEDIR al usuario palabras clave 
+    8.2.GUARDAR en palabras_clave
+    8.3.DEFINIR total_palabras_clave = 0
+    8.4.SI correo electrónico contiene cualquier palabra de palabras_clave
+        8.5.1	SUMAR total_palabras_clave += 1
+        8.5.2	IMPRIMIR correo electrónico
+    8.5.SINO
+        8.5.1	IMPRIMIR “No se encontraron las palabras ingresadas”
+    8.6. IMPRIMIR total_palabras_clave
+9.SI opción elegida == '2'
+    9.1.PEDIR el destinatario
+    9.2.PEDIR el asunto
+    9.3.PEDIR el mensaje
+    9.4.PREGUNTAR si el usuario lo desea enviar
+    9.5.GUARDAR en desea_enviar
+    9.6.SI desea enviar == 'si'
+        9.6.1.	ENVIAR correo
+		9.6.2.	PREGUNTAR si desea enviarlo periódicamente
+		9.6.3.	GUARDAR en envio_periodico
+		9.6.4.	SI envio_periodico == ´si´
+			9.6.4.1. PREGUNTAR frecuencia en días
+			9.6.4.2. GUARDAR en frecuencia
+			9.6.4.2. ENVIAR correo cada frecuencia días
+    9.7.SINO
+        9.7.1.	GUARDAR correo
+10.SINO
+    10.1.PREGUNTAR si desea salir
+    10.2.GUARDAR en desea_salir
+    10.3.SI desea_salir == 'si'
+    	10.3.1	FINSI
+    10.4.	SINO
+    	10.4.1REGRESAR a paso 4
+11.FIN
 
 Salidas
 -total_palabras_clave (entero)
