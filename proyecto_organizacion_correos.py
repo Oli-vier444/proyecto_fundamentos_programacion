@@ -4,7 +4,7 @@
 """
 Descripción: El programa lee la bandeja de entrada para poder buscar
 palabras clave en correos, además de poder redactar y enviarlos periódicamente.
-Para envio de correos: smtplib
+Para envio de correos: smtplib (solo gmail)
 """
 import smtplib
 
