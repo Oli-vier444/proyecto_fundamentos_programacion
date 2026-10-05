@@ -1,64 +1,60 @@
 
 #Algoritmo “Organización y automatización de correos electrónicos”
+#Autor: Olivier Gaytán
+"""
+Descripción: El programa lee la bandeja de entrada para poder buscar
+palabras clave en correos, además de poder redactar y enviarlos periódicamente.
+Para envio de correos: smtplib
+"""
+import smtplib
 
-def ingresar_a_correo():
-    input("USUARIO: ")
-    input("CONTRASEÑA: ")
+#Pide el usuario y la contraseña del correo electrónico
+usuario = input("USUARIO: ")
+contraseña = input("CONTRASEÑA DE APLICACIÓN GOOGLE: ")
 
 def mostrar_menu():
+    #muestra el menú de opciones al usuario
     opciones = "1. Buscar \n2. Escribir correo \n3. Salir"
     print(opciones)
 
 def escribir_correo():
-    input("Destinatario: ")
-    input("Asunto: ")
-    input("Mensaje: ")
+    correo = usuario
+    clave = contraseña
+    destinatario = input("Destinatario: ")
+    asunto = input("Asunto: ")
+    mensaje = input("Mensaje: ")
+    desea_enviar = input("¿Deseas enviarlo?: ")
+    texto = f"subject: {asunto} \n\n {mensaje}"
 
-ingresar_a_correo()
+    server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+    server.starttls
+
+    server.login(correo, clave)
+    
+    if desea_enviar == "si":
+        envio_periodico = input("¿Deseas enviarlo periodicamente?: ")
+        envio_periodico.strip().lower()
+        if envio_periodico == "si":
+            frecuencia = int(input("¿Cada cuántos días?: "))
+            server.sendmail(correo, destinatario, texto)
+            print(f"Correo enviado. se enviará cada {frecuencia} días")
+        elif envio_periodico == "no":
+            server.sendmail(correo, destinatario, texto)
+            print("Correo enviado")
+
+
 mostrar_menu()
 
 opcion_elegida = input("Ingrese un número: ")
 
-"""""
-7.	SI opcion_elegida == '1'
-    a.	PEDIR al usuario palabras clave 
-    b.	GUARDAR en palabras_clave
-    c.	DEFINIR total_palabras_clave = 0
-    """
-palabras_clave = list(input("Ingrese palabras clave separadas por comas: ").split(","))
-total_palabras_clave = 0
-"""
-    d.	LEER bandeja de entrada
-    e.	SI correo electrónico contiene cualquier palabra de palabras_clave
-        i.	SUMAR total_palabras_clave += 1
-        """
-total_palabras_clave = total_palabras_clave + 1
-antiguedad = fecha_entrada - fecha_actual
-"""
-        ii.	IMPRIMIR correo electrónico
-    g.	SINO
-        i.	IMPRIMIR “No se encontraron las palabras ingresadas”
-    h.  IMPRIMIR total_palabras_clave
-8.	SI opción elegida == '2'
-    a.	PEDIR el destinatario
-    b.	PEDIR el asunto
-    c.	PEDIR el mensaje
-"""
-escribir_correo()
-"""
-    d.	PREGUNTAR si el usuario lo desea enviar
-    e.	GUARDAR en desea_enviar
-    f.	SI desea enviar == 'si'
-        i.	ENVIAR correo
-    g.	SINO
-        i.	GUARDAR correo
-9.	SINO
-    a.	PREGUNTAR si desea salir
-    b.	GUARDAR en desea_salir
-c.	SI desea_salir == 'si'
-    i.	FIN
-d.	SINO
-    i.	REGRESAR a paso 4 -- mostrar_menu()
-    
-10.	FIN
-"""
+if opcion_elegida == "1":
+    palabras_clave = list(input("Ingrese palabras clave separadas por comas: ").split(","))
+    total_palabras_clave = 0
+    total_palabras_clave = total_palabras_clave + 1
+elif opcion_elegida == "2":
+    escribir_correo()
+elif opcion_elegida == "3":
+    print("Adios!")
+
+
+
