@@ -87,13 +87,11 @@ if opcion_elegida == "1":
                 msj = email.message_from_bytes(parte[1])
                 subject, encoding = decode_header(msj["Subject"])[0]
 
-                if isinstance(subject,bytes):
-                    asunto = subject.decode(encoding or "utf-8")
-                
                 asunto = msj.get('Subject')
                 emisor = msj.get('From')
                 todos.append(asunto)
                 todos.append(emisor)
+                
     for palabras_clave in todos:
         total_palabras_clave += 1
     print(f"Palabras clave encontradas: {total_palabras_clave}")
