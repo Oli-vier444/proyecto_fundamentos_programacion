@@ -41,15 +41,6 @@ if proveedor_elegido == 1:
     servidor_imap = "imap.gmail.com"
     servidor_smtp = "smtp.gmail.com"
     puerto = 465
-
-elif proveedor_elegido == "no disponble":
-    servidor_imap = "imap-mail.outlook.com"
-    servidor_smtp = "smtp-mail.outlook.com"
-    puerto = 587
-elif proveedor_elegido == "no disponible":
-    servidor_imap = "imap.yahoo.com"
-    servidor_smtp = "smtp.yahoo.com"
-    puerto = 587
 elif proveedor_elegido == 2:
     servidor_imap = input("Ingrese la dirección IMAP de su proveedor: ")
     servidor_smtp = input("Ingrese la dirección SMTP de su proveedor: ")
@@ -105,6 +96,8 @@ mostrar_menu()
 
 opcion_elegida = input("Ingrese un número: ")
 
+n=0
+
 if opcion_elegida == "1":
     palabras_clave = list(input("Ingrese palabras clave separadas por comas: ").split(","))
     total_palabras_clave = 0
@@ -122,23 +115,34 @@ if opcion_elegida == "1":
     hasta = hasta * -1
 
     ultimos_correos = nums_msjs[hasta:]
-    todos = []
+    todos = [[],[]]
+    todos_asunto = todos[0]
+    todos_emisor = todos[1]
     for nums_msjs in ultimos_correos:
         _, datos = imap.fetch(nums_msjs, '(RFC822)')
 
         for parte in datos:
             if isinstance(parte, tuple):
                 msj = email.message_from_bytes(parte[1])
-                subject, encoding = decode_header(msj["Subject"])[0]
+                asunto, encoding = decode_header(msj["Subject"])[0]
+
+                if isinstance(asunto, bytes):
+                    asunto = asunto.decode(encoding or "utf-8")
 
                 asunto = msj.get('Subject')
                 emisor = msj.get('From')
-                todos.append(asunto)
-                todos.append(emisor)
+                todos_asunto.append(asunto)
+                todos_emisor.append(emisor)
+
+                print("-"*44)
+                print(todos_asunto[n])
+                print(todos_emisor[n])
+                
+                n+=1
                 
     for palabras_clave in todos:
         total_palabras_clave += 1
-    print(f"Palabras clave encontradas: {total_palabras_clave}")
+    print(f"\nPalabras clave encontradas: {total_palabras_clave}")
 elif opcion_elegida == "2":
     escribir_correo()
 elif opcion_elegida == "3":
