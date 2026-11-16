@@ -11,20 +11,34 @@ Para manejo de tiempo: time
 
 
 
-
-
-
 IMPORTANTE: Es necesario crear una contraseña de aplicación desde tu cuenta de google
 Por ahora, el código solo funciona con correos gmail
+
+NOTA: si manda correo a una cuenta outlook, es posible que el mensaje tarde algunos días en llegar (cuarentena de correos microsoft)
 
 
 
 """
+import sys
 import imaplib
 import email
 import smtplib
 from email.header import decode_header
 from time import sleep
+
+caracteres_permitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZñÑáéíóú0123456789@./-"
+
+def validar_string(respuesta, caracteres_p):
+    texto = []
+    n = 0
+    for _ in range(len(respuesta)):
+        if respuesta[n] in caracteres_p:
+            texto.append(respuesta[n])
+            n += 1
+        elif respuesta[n] not in caracteres_p:
+            n+=1
+    texto = ''.join(texto)
+    return texto
 
 
 def elegir_proveedor():
@@ -35,49 +49,59 @@ def elegir_proveedor():
 
 elegir_proveedor()
 
-proveedor_elegido = int(input("Ingrese el número correspondiente: "))
+try:
+    proveedor_elegido = int(input("Ingrese el número correspondiente: "))
+except ValueError:
+    print("Valor inválido")       
+    sys.exit(0)
 
 if proveedor_elegido == 1:
     servidor_imap = "imap.gmail.com"
     servidor_smtp = "smtp.gmail.com"
     puerto = 465
 elif proveedor_elegido == 2:
-    servidor_imap = input("Ingrese la dirección IMAP de su proveedor: ")
-    servidor_smtp = input("Ingrese la dirección SMTP de su proveedor: ")
+    print("\nEl programa funciona mejor con correos gmail, puede haber errores al utilizar otro proveedor\n")
+    servidor_imap = validar_string(input("Ingrese la dirección IMAP de su proveedor: "), caracteres_permitidos)
+    servidor_smtp = validar_string(input("Ingrese la dirección SMTP de su proveedor: "), caracteres_permitidos)
     puerto = int(input("Ingrese el puerto del proveedor: "))
+else:
+    print("Valor inválido")
+    sys.exit(0)
+ 
 
-
-usuario = input("USUARIO: ")
-contraseña = input("CLAVE DE APLICACIÓN: ")
+usuario = validar_string(input("\nUSUARIO: "), caracteres_permitidos)
+contraseña = validar_string(input("CLAVE DE APLICACIÓN: "), caracteres_permitidos)
 #Pide el usuario y la contraseña del correo electrónico
-
-
-
-
 
 def mostrar_menu():
     #muestra el menú de opciones al usuario
-    opciones = "1. Buscar \n2. Escribir correo \n3. Salir"
+    opciones = "\n1. Buscar \n2. Escribir correo \n3. Salir\n"
     print(opciones)
 
 def escribir_correo():
     correo = usuario
     clave = contraseña
-    destinatario = input("Destinatario: ")
+    destinatario = input("\nDestinatario: ")
     asunto = input("Asunto: ")
     mensaje = input("Mensaje: ")
-    desea_enviar = input("¿Deseas enviarlo?: ")
+    desea_enviar = validar_string(input("¿Deseas enviarlo?: ").lower().strip(),caracteres_permitidos)
     texto = f"subject: {asunto} \n\n {mensaje}"
 
-    server= smtplib.SMTP_SSL(servidor_smtp, puerto)
-    server.starttls
-
+    server = smtplib.SMTP_SSL(servidor_smtp, puerto, local_hostname="localhost")
     server.login(correo, clave)
     
+    while desea_enviar != "si" and desea_enviar != "no":
+        print("Por favor escribe 'si' o 'no'")
+        desea_enviar = validar_string(input("¿Deseas enviarlo?: ").lower().strip(),caracteres_permitidos)
+
     if desea_enviar == "si":
 
-        envio_periodico = input("¿Deseas enviarlo periodicamente?: ")
+        envio_periodico = validar_string(input("¿Deseas enviarlo periodicamente?: "), caracteres_permitidos)
         envio_periodico.strip().lower()
+        while envio_periodico != "si" and envio_periodico != "no":
+            print("Por favor escribe 'si' o 'no'")
+            envio_periodico = validar_string(input("¿Deseas enviarlo periodicamente?: ").strip().lower(), caracteres_permitidos)
+
         if envio_periodico == "si":
             frecuencia = int(input("¿Cada cuántos días?: "))
             repetir = int(input("¿Durante cuántos días?: "))
@@ -90,16 +114,20 @@ def escribir_correo():
         elif envio_periodico == "no":
             server.sendmail(correo, destinatario, texto)
             print("Correo enviado")
+            
+    elif desea_enviar == "no":
+        print("Adios!")
+        sys.exit(0)
+        
 
-  
 mostrar_menu()
 
-opcion_elegida = input("Ingrese un número: ")
+opcion_elegida = validar_string(input("Ingrese un número: "), caracteres_permitidos)
 
 n=0
 
 if opcion_elegida == "1":
-    palabras_clave = list(input("Ingrese palabras clave separadas por comas: ").split(","))
+    palabras_clave = list(input("\nIngrese palabras clave separadas por comas: ").split(","))
     total_palabras_clave = 0
 
     imap = imaplib.IMAP4_SSL(servidor_imap)
@@ -147,6 +175,3 @@ elif opcion_elegida == "2":
     escribir_correo()
 elif opcion_elegida == "3":
     print("Adios!")
-
-
-
