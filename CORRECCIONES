@@ -1,1 +1,13 @@
 Hola profe, hice correcciones en el pseudocodigo_algoritmo_organizador_correos.txt en cuanto a las entradas y salidas, numeración y envíos periódicos, favor de revisar. Gracias
+
+Correcciones 2:
+
+Avance 2: se eliminó la variable "antiguedad" y se implmentaron otros operadores aritméticos, por ejemplo,
+para calcular el tiempo en días, se multiplica el tiempo en segundos por 86400
+
+Avance 3: Se soluciona el problema de la variable antiguedad y se implementan funciones como validar_string(),
+elegir_proveedor() y escribir_correo()
+
+Avance 4: Se solucionó el problema de inicio de sesión y se proporciona un correo de ejemplo para utilizar.
+
+Avance 5: Se solucionó el problema de inicio de sesión y se proporciona un correo de ejemplo para utilizar.
